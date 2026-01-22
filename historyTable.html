@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Appointment Booking - History</title>
+    <link rel="stylesheet" href="/historyTable.css">
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <h2 class="headerTitle">Appointment Booking - History</h2>
+
+            <div class="nav-btn">
+                <button id="home" class="btn">Home</button>
+                <button id="history" class="btn">Slot History</button>
+            </div>
+        </div>
+
+        <div class="hero">
+            <div class="slotHistory">
+                <table id="historyTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Service</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+                        <!-- History entries will be populated here -->
+                    </tbody>
+                </table>
+                <p id="emptyHistoryMsg">No booking history available.</p>
+            </div>
+        </div>
+    </div>
+    <script src="/historyScript.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Appointment Booking</title>
+    <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+            <h2 class="headerTitle">Appointment Booking</h2>
+
+            <div class="nav-btn">
+                <button id="slotBook" class="btn">Book Slot</button>
+                <button id="history" class="btn">Slot History</button>
+            </div>
+        </div>
+
+        <div class="hero">
+            <div id="modal" class="modal-overlay">
+                <div class="form-div">
+                    <form id="detailsForm" >
+                        <h2>Book An Appointment</h2>
+                        <input type="text" id="name" placeholder="Enter Your Name" autocomplete="off" >
+
+                        <input type="email" id="email" placeholder="Enter Your Email" >
+
+                        <select id="services" name="category" >
+                            <option value="" disabled selected>Select Services</option>
+                            <option value="Consultant">Consultant</option>
+                            <option value="CheckUp">CheckUp</option>
+                            <option value="Full Body CheckUp">Full Body Checkup</option>
+                        </select>
+
+                        <input type="date" id="date" min="2026-01-22" max="2026-06-30" />
+
+                        <h4>Available Slots</h4>   
+                        <p id="error-msg">No Slots Found</p>
+                        <div id="slots-container">
+                        </div>
+
+                        <div class="modal-buttons">
+                            <button type="button" class="btn" id="saveBtn" disabled>Book</button>
+                            <button type="reset" class="btn" id="cancelBtn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- <div class="slotHistory">
+                <table id="historyTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Service</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+                        
+                    </tbody>
+                </table>
+                <h2 id="emptyHistoryMsg">No Bookings Found</h2>
+            </div> -->
+        </div>
+    </div>
+    <script src="/script.js"></script>
+</body>
+</html>
