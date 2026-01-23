@@ -55,7 +55,7 @@ cancelBtn.onclick = () => {
 
 saveBtn.onclick = () => {
     if (addDetails()) {
-        window.location.href = "historyTable.html"
+        window.location.href = "index.html"
         form.reset();
         modal.style.display = "none";
     }
@@ -72,12 +72,12 @@ function generateTimeSlots(date) {
 
     const timeBooked = bookingsByDate[date] || [];
     
-    if(bookingsByDate[date].length == 17)
-    {
-        document.getElementById("slot-error").style.display = "flex";
-        document.getElementById("slots-container").style.display = "none";
-        return;
-    }
+    // if(bookingsByDate[date].length == 17)
+    // {
+    //     document.getElementById("slot-error").style.display = "flex";
+    //     document.getElementById("slots-container").style.display = "none";
+    //     return;
+    // }
 
     let currentHour = startHour;
     let currentMinute = 0;
