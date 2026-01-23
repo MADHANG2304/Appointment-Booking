@@ -18,54 +18,21 @@
         </div>
 
         <div class="hero">
-            <div id="modal" class="modal-overlay">
-                <div class="form-div">
-                    <form id="detailsForm" >
-                        <h2>Book An Appointment</h2>
-                        <input type="text" id="name" placeholder="Enter Your Name" autocomplete="off" >
-
-                        <input type="email" id="email" placeholder="Enter Your Email" >
-
-                        <select id="services" name="category" >
-                            <option value="" disabled selected>Select Services</option>
-                            <option value="Consultant">Consultant</option>
-                            <option value="CheckUp">CheckUp</option>
-                            <option value="Full Body CheckUp">Full Body Checkup</option>
-                        </select>
-
-                        <input type="date" id="date" min="2026-01-22" max="2026-06-30" />
-
-                        <h4>Available Slots</h4>   
-                        <p id="error-msg">No Slots Found</p>
-                        <div id="slots-container">
-                        </div>
-
-                        <div class="modal-buttons">
-                            <button type="button" class="btn" id="saveBtn" disabled>Book</button>
-                            <button type="reset" class="btn" id="cancelBtn">Cancel</button>
-                        </div>
-                    </form>
+            <div class="hero-inner">
+                <div class="hero-title">
+                    <div class="hero-text">
+                        <p>Find <span style="color: red;">a doctor</span> for you now!</p>
+                    </div>
+                    <div class="hero-desc">
+                        <p>We take the guesswork out of locating a doctor, hospital or other medical facility in your area for you and your family</p>
+                    </div>
+                    <div class="hero-action">
+                        <button class="hero-btn">Get Started</button>
+                        <button class="hero-btn" id="bookSlot">Book Slot</button>
+                    </div>
                 </div>
+                <img src="https://img.freepik.com/premium-vector/doctor-cartoon-vector_889056-101660.jpg" class="hero-img">
             </div>
-
-            <!-- <div class="slotHistory">
-                <table id="historyTable">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Service</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="historyTableBody">
-                        
-                    </tbody>
-                </table>
-                <h2 id="emptyHistoryMsg">No Bookings Found</h2>
-            </div> -->
         </div>
     </div>
     <script src="/script.js"></script>

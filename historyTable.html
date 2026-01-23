@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Appointment Booking - History</title>
     <link rel="stylesheet" href="/historyTable.css">
 </head>
+
 <body>
     <div class="main">
         <div class="header">
@@ -16,6 +18,30 @@
         </div>
 
         <div class="hero">
+            <h3 style="margin-top: 20px; margin-left: 20px;">Filter by:</h3>
+            <div class="filter">
+                <div>
+                    <select id="date" class="filter">
+                        <option value="" disabled selected>Date</option>
+                        <option value="2026-01-23">23-01-2026</option>
+                        <option value="2026-01-24">24-01-2026</option>
+                        <option value="2026-01-25">25-01-2026</option>
+                        <option value="2026-01-26">26-01-2026</option>
+                        <option value="none">None</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="services" class="filter">
+                        <option value="" disabled selected>Services</option>
+                        <option value="Consultant">Consultant</option>
+                        <option value="Checkup">Checkup</option>
+                        <option value="Full Body Checkup">Full Body Checkup</option>
+                        <option value="none">None</option>
+                    </select>
+                </div>
+                <button type="button" id="apply-filter">Apply Filter</button>
+            </div>
+
             <div class="slotHistory">
                 <table id="historyTable">
                     <thead>
@@ -25,6 +51,7 @@
                             <th>Service</th>
                             <th>Date</th>
                             <th>Time</th>
+                            <th>Mobile Number</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -38,4 +65,5 @@
     </div>
     <script src="/historyScript.js"></script>
 </body>
+
 </html>
