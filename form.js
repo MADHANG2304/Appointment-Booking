@@ -10,6 +10,8 @@ const errorMsg = document.getElementById("error-msg");
 const showDate = document.getElementById("show-date");
 const legendDiv = document.getElementById("legend");
 const formError = document.getElementById("form-error");
+const idError = document.getElementById("id-error");
+const goBackBtn = document.getElementById("go-back");
 
 const userBooking = JSON.parse(localStorage.getItem("userBooking")) || [];
 
@@ -43,41 +45,38 @@ cancelBtn.onclick = () => {
     legendDiv.style.display = "none"
     modal.style.display = "none";
     if (window.location.href.includes("?")) {
-        console.log(1)
         window.location.href = "historyTable.html";
     }
     else if (window.location.href === "http://127.0.0.1:5500/form.html") {
-        console.log(2)
         window.location.href = "index.html";
     }
-    console.log(window.location.href)
 }
 
 saveBtn.onclick = () => {
     if (addDetails()) {
-        window.location.href = "index.html"
+        if (window.location.href.includes("?")) {
+            window.location.href = "historyTable.html";
+        }
+        else if (window.location.href === "http://127.0.0.1:5500/form.html") {
+            window.location.href = "index.html";
+        }
         form.reset();
         modal.style.display = "none";
     }
 }
 
-errorMsg.style.display = "flex";
+goBackBtn.onclick = () => {
+    window.location.href = "index.html";
+}
+
 const startHour = 10;
 const endHour = 18;
 const duration = 30;
-
 
 function generateTimeSlots(date) {
     slotContainer.innerHTML = "";
 
     const timeBooked = bookingsByDate[date] || [];
-    
-    // if(bookingsByDate[date].length == 17)
-    // {
-    //     document.getElementById("slot-error").style.display = "flex";
-    //     document.getElementById("slots-container").style.display = "none";
-    //     return;
-    // }
 
     let currentHour = startHour;
     let currentMinute = 0;
@@ -91,8 +90,8 @@ function generateTimeSlots(date) {
         const slotButton = document.createElement("button");
         slotButton.value = formattedTime;
         slotButton.textContent = formattedTime;
-        slotButton.classList.add('time-slot');
         slotButton.type = "button";
+        slotButton.classList.add('time-slot');
 
         if (timeBooked.includes(formattedTime)) {
             slotButton.classList.add("booked");
@@ -154,18 +153,17 @@ function addDetails() {
 
         if (isEdit) {
             userBooking.forEach(booking => {
-                const date = booking;
-
+                const date = booking.date;
                 if (booking.id == editIndex) {
-                    if (!bookingsByDate[date]) {
-                        bookingsByDate[date] = [];
+                    if (!bookingsByDate[currDate]) {
+                        bookingsByDate[currDate] = [];
                     }
                     if (bookingsByDate[date].includes(booking.selectedTime)) {
                         bookingsByDate[date] = bookingsByDate[date].filter(time => time != booking.selectedTime)
-                        bookingsByDate[date].push(selectedTime);
+                        bookingsByDate[currDate].push(selectedTime);
                     }
                     else {
-                        bookingsByDate[date].push(selectedTime);
+                        bookingsByDate[currDate].push(selectedTime);
                     }
 
                     booking.name = name;
@@ -212,30 +210,65 @@ function addDetails() {
 function validateForm(name, email, number, services) {
     let isValid = true;
     let nameRegex = /^[a-zA-Z0-9]+/;
-    if (!nameRegex.test(name)) {
+    if (name == "" || name.length == 0) {
+        isValid = false;
+        document.getElementById("name-error").textContent = "Name should not be empty";
+        document.getElementById("name-error").style.display = "flex";
+    }
+    else if (!nameRegex.test(name)) {
         isValid = false;
         document.getElementById("name-error").textContent = "Please enter valid Name";
         document.getElementById("name-error").style.display = "flex";
     }
+    else {
+        isValid = true;
+        document.getElementById("name-error").textContent = "";
+        document.getElementById("name-error").style.display = "none";
+    }
 
     let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(email)) {
+    if (email == "" || email.length == 0) {
+        isValid = false;
+        document.getElementById("email-error").textContent = "Email should not be empty";
+        document.getElementById("email-error").style.display = "flex";
+    }
+    else if (!emailRegex.test(email)) {
         isValid = false;
         document.getElementById("email-error").textContent = "Please enter valid email";
         document.getElementById("email-error").style.display = "flex";
     }
+    else {
+        isValid = true;
+        document.getElementById("email-error").textContent = "";
+        document.getElementById("email-error").style.display = "none";
+    }
 
     let numberRegex = /^\d{10}$/;
-    if (!numberRegex.test(number)) {
+    if (number == '' || number.length == 0) {
+        isValid = false;
+        document.getElementById("number-error").textContent = "Number should not be empty";
+        document.getElementById("number-error").style.display = "flex";
+    }
+    else if (!numberRegex.test(number)) {
         isValid = false;
         document.getElementById("number-error").textContent = "Number should have 10 digits";
         document.getElementById("number-error").style.display = "flex";
+    }
+    else {
+        isValid = true;
+        document.getElementById("number-error").textContent = "";
+        document.getElementById("number-error").style.display = "none";
     }
 
     if (services == "" || services.length == 0) {
         isValid = false;
         document.getElementById("services-error").textContent = "Select the services category";
         document.getElementById("services-error").style.display = "flex";
+    }
+    else {
+        isValid = true;
+        document.getElementById("services-error").textContent = "";
+        document.getElementById("services-error").style.display = "none";
     }
 
     return isValid;
@@ -244,6 +277,7 @@ function validateForm(name, email, number, services) {
 
 function reschedule() {
     isEdit = true;
+    let validId = false;
     userBooking.forEach(booking => {
         if (booking.id == editIndex) {
             document.getElementById("name").value = booking.name;
@@ -251,14 +285,22 @@ function reschedule() {
             document.getElementById("number").value = booking.number;
             document.getElementById("services").value = booking.services;
             document.getElementById("date").value = booking.date;
+
+            validId = true;
         }
     })
+    if (!validId) {
+        document.getElementById("error-div-id").style.display = "flex";
+        form.style.display = "none";
+        idError.style.display = "flex";
+    }
     modal.style.display = "flex";
 }
 
 
 window.onload = () => {
     idURL = window.location.href;
+    errorMsg.style.display = "flex";
     if (idURL.includes("?")) {
         editIndex = idURL.split("?")[1];
         reschedule();

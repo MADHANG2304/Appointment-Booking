@@ -2,8 +2,11 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Appointment Booking - History</title>
     <link rel="stylesheet" href="/historyTable.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -22,21 +25,22 @@
             <div class="filter">
                 <div>
                     <select id="date" class="filter">
-                        <option value="" disabled selected>Date</option>
-                        <option value="2026-01-23">23-01-2026</option>
-                        <option value="2026-01-24">24-01-2026</option>
-                        <option value="2026-01-25">25-01-2026</option>
-                        <option value="2026-01-26">26-01-2026</option>
-                        <option value="none">None</option>
+                        <option value="none" disabled selected>Date</option>
+                        <option value="2026-01-27">27-01-2026</option>
+                        <option value="2026-01-28">28-01-2026</option>
+                        <option value="2026-01-29">29-01-2026</option>
+                        <option value="2026-01-30">30-01-2026</option>
+                        <option value="2026-01-31">31-01-2026</option>
+                        <option value="none">All Dates</option>
                     </select>
                 </div>
                 <div>
                     <select id="services" class="filter">
-                        <option value="" disabled selected>Services</option>
+                        <option value="none" disabled selected>Services</option>
                         <option value="Consultant">Consultant</option>
-                        <option value="Checkup">Checkup</option>
+                        <option value="CheckUp">CheckUp</option>
                         <option value="Full Body Checkup">Full Body Checkup</option>
-                        <option value="none">None</option>
+                        <option value="none">All Services</option>
                     </select>
                 </div>
                 <button type="button" id="apply-filter">Apply Filter</button>

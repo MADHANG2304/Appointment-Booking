@@ -25,7 +25,8 @@ body {
     padding: 10px;
 }
 
-.nav-btn{
+
+.nav-btn {
     display: flex;
     width: 20%;
     justify-content: end;
@@ -34,7 +35,7 @@ body {
     margin-left: 40%;
 }
 
-.nav-btn .btn{
+.nav-btn .btn {
     padding: 8px 12px;
     font-size: 14px;
     cursor: pointer;
@@ -42,7 +43,8 @@ body {
     border-radius: 6px;
     transition: 0.2s;
 }
-.nav-btn .btn:hover{
+
+.nav-btn .btn:hover {
     background-color: #ccc;
 }
 
@@ -50,13 +52,13 @@ body {
     height: 90%;
 }
 
-.hero-inner{
+.hero-inner {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.hero-title{
+.hero-title {
     width: 35%;
     display: flex;
     flex-direction: column;
@@ -65,30 +67,32 @@ body {
     margin-top: 10%;
 }
 
-.hero-img{
+.hero-img {
     margin: 10px;
     margin-right: 7%;
     width: 40%;
 }
-.hero-text{
+
+.hero-text {
     width: 50%;
     font-size: xx-large;
     font-weight: bolder;
     margin-bottom: 10px;
 }
-.hero-desc{
+
+.hero-desc {
     width: 80%;
     font-size: medium;
     font-weight: 900;
 }
 
-.hero-action{
+.hero-action {
     margin-top: 10px;
     display: flex;
-    gap: 15px; 
+    gap: 15px;
 }
 
-.hero-btn{
+.hero-btn {
     background-color: #007bff;
     color: white;
     padding: 10px 15px;
@@ -99,7 +103,7 @@ body {
     transition: background-color 0.3s;
 }
 
-.hero-btn:hover{
+.hero-btn:hover {
     background-color: #005dc1;
 }
 
@@ -124,6 +128,30 @@ body {
     align-items: center;
 }
 
+.error-div{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    background: #fff;
+    color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px;
+}
+
+#go-back{
+    width: 30%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
 #detailsForm {
     display: flex;
     flex-direction: column;
@@ -139,34 +167,34 @@ body {
 #detailsForm select,
 #detailsForm date,
 #detailsForm textarea {
-  padding: 10px 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  transition: 0.2s;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.2s;
 }
 
 
 #detailsForm .btn {
-  width: 48%;
-  padding: 10px 0;
-  font-size: 14px;
-  border: none;
-  border-radius: 6px;
-  transition: 0.2s;
+    width: 48%;
+    padding: 10px 0;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    transition: 0.2s;
 }
 
 #name-error,
 #email-error,
 #number-error,
-#services-error{
+#services-error {
     display: none;
     color: red;
     text-align: center;
     font-size: small;
 }
 
-.legend{
+.legend {
     display: none;
     margin-top: 15px;
     margin-bottom: 5px;
@@ -176,7 +204,7 @@ body {
     border-radius: 5px;
 }
 
-.lgd-btn{
+.lgd-btn {
     background-color: #007bff;
     color: white;
     padding: 10px 15px;
@@ -197,29 +225,29 @@ body {
 }
 
 #saveBtn {
-  background: #007bff;
-  color: white;
-  cursor: not-allowed;
-  margin-right: 4%;
+    background: #007bff;
+    color: white;
+    cursor: not-allowed;
+    margin-right: 4%;
 }
 
 #saveBtn:hover {
-  background: #005dc1;
+    background: #005dc1;
 }
 
 #cancelBtn {
-  background: #e74c3c;
-  color: white;
+    background: #e74c3c;
+    color: white;
 }
 
 #cancelBtn:hover {
-  background: #c0392b;
+    background: #c0392b;
 }
 
-.modal-buttons{
+.modal-buttons {
     width: 100%;
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
 #slots-container {
@@ -229,7 +257,7 @@ body {
     justify-content: center;
 }
 
-#slot-error{
+#slot-error {
     display: none;
 }
 
@@ -261,9 +289,11 @@ body {
     text-align: center;
     width: 100%;
 }
+
 .time-slot.selected {
     background-color: #28a745;
 }
+
 .time-slot.selected:hover {
     background-color: #1e7e34;
 }
@@ -280,7 +310,7 @@ body {
     transition: background-color 0.3s;
 }
 
-.cancel-booking-btn{
+.cancel-booking-btn {
     margin-right: 5px;
     padding: 5px 10px;
     background-color: #ffc107;
@@ -292,7 +322,7 @@ body {
     transition: background-color 0.3s;
 }
 
-.reschedule-booking-btn{
+.reschedule-booking-btn {
     padding: 5px 10px;
     background-color: #17a2b8;
     color: white;
@@ -303,7 +333,7 @@ body {
     transition: background-color 0.3s;
 }
 
-.slotHistory{
+.slotHistory {
     margin: 20px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -324,26 +354,27 @@ body {
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #fff;
-  border-radius: 8px;
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
 }
 
-th, td {
-  padding: 12px 10px;
-  text-align: left;
-  font-size: 14px;
+th,
+td {
+    padding: 12px 10px;
+    text-align: left;
+    font-size: 14px;
 }
 
 th {
-  background: #f5f5f5;
-  font-weight: bold;
+    background: #f5f5f5;
+    font-weight: bold;
 }
 
-tr:hover{
-  transform: translateY(-3px);
-  transition: all 0.3s ease;
+tr:hover {
+    transform: translateY(-3px);
+    transition: all 0.3s ease;
 }
 
 #emptyHistoryMsg {
@@ -354,4 +385,200 @@ tr:hover{
     align-items: center;
     font-size: 18px;
     color: #888;
+}
+
+#id-error{
+    display: none;
+    text-align: center;
+}
+
+
+@media (min-width:426px) and (max-width:768px) {
+    .header {
+        margin: 10px;
+    }
+
+    .hero-inner {
+        margin-top: 30px;
+    }
+
+    .hero-title {
+        width: 100%;
+        margin-top: 5%;
+    }
+
+    .hero h2 {
+        font-size: 20px;
+    }
+
+    .modal-overlay {
+        overflow-y: auto;
+    }
+    
+    #detailsForm{
+        width: 400px;
+    }
+
+    #detailsForm input,
+    #detailsForm select,
+    #detailsForm date,
+    #detailsForm textarea {
+        padding: 8px 10px;
+        font-size: 10px;
+    }
+
+    .legend {
+        margin-top: 3px;
+        margin-bottom: 2px;
+        justify-content: space-evenly;
+    }
+
+    .lgd-btn {
+        padding: 10px 12px;
+        font-size: 10px;
+    }
+
+    .time-slot {
+        padding: 10px 12px;
+        font-size: 10px;
+    }
+
+    .clear-btn {
+        padding: 5px 10px;
+        font-size: 10px;
+        margin-top: 5px;
+    }
+
+     h4 {
+        font-size: 16px;
+    }
+
+    #show-date{
+        font-size: 14px;
+    }
+
+    #detailsForm .btn {
+        font-size: 12px;
+    }
+
+}
+
+
+@media screen and (max-width : 426px) {
+    .header {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .headerTitle {
+        font-size: medium;
+    }
+
+    .nav-btn {
+        gap: 10px;
+        padding: 10px 0;
+        margin-left: 30%;
+    }
+
+    .nav-btn .btn {
+        padding: 0px 20px;
+        font-size: 10px;
+    }
+
+    .hero {
+        height: 90%;
+    }
+
+    .hero-inner {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .hero-title {
+        width: 75%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .hero-text {
+        width: 70%;
+        font-size: larger;
+    }
+
+    .hero-desc {
+        width: 70%;
+        font-size: small;
+    }
+
+    .hero-btn {
+        padding: 7px 10px;
+    }
+
+    .hero-img {
+        width: 80%;
+        margin: 10%;
+    }
+
+    .modal-overlay {
+        overflow-y: auto;
+    }
+
+    #detailsForm {
+        width: 270px;
+        padding-top: 35px;
+    }
+
+    .hero h2 {
+        font-size: 16px;
+    }
+
+    #detailsForm input,
+    #detailsForm select,
+    #detailsForm date,
+    #detailsForm textarea {
+        padding: 6px 4px;
+        font-size: 10px;
+    }
+
+    .legend {
+        margin-top: 3px;
+        margin-bottom: 2px;
+        justify-content: space-evenly;
+    }
+
+    .lgd-btn {
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+
+    .time-slot {
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+
+
+    #error-msg {
+        font-size: 12px;
+    }
+
+    .clear-btn {
+        margin-top: 2px;
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+
+    h4 {
+        font-size: 14px;
+    }
+
+    #detailsForm .btn {
+        width: 25%;
+        font-size: 12px;
+    }
+
+    #show-date{
+        font-size: 12px;
+    }
 }

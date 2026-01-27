@@ -25,7 +25,7 @@ body {
     padding: 10px;
 }
 
-.nav-btn{
+.nav-btn {
     display: flex;
     width: 20%;
     justify-content: end;
@@ -34,7 +34,7 @@ body {
     margin-left: 40%;
 }
 
-.nav-btn .btn{
+.nav-btn .btn {
     padding: 8px 12px;
     font-size: 14px;
     cursor: pointer;
@@ -42,11 +42,12 @@ body {
     border-radius: 6px;
     transition: 0.2s;
 }
-.nav-btn .btn:hover{
+
+.nav-btn .btn:hover {
     background-color: #ccc;
 }
 
-.cancel-booking-btn{
+.cancel-booking-btn {
     margin-right: 5px;
     padding: 5px 10px;
     background-color: #ffc107;
@@ -58,7 +59,7 @@ body {
     transition: background-color 0.3s;
 }
 
-.reschedule-booking-btn{
+.reschedule-booking-btn {
     padding: 5px 10px;
     background-color: #17a2b8;
     color: white;
@@ -69,7 +70,7 @@ body {
     transition: background-color 0.3s;
 }
 
-.slotHistory{
+.slotHistory {
     height: 100vh;
     max-height: 70vh;
     background-color: #f9f9f9;
@@ -87,26 +88,34 @@ body {
 
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #fff;
-  border-radius: 8px;
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
 }
 
-th, td {
-  padding: 12px 10px;
-  text-align: left;
-  font-size: 14px;
+th,
+td {
+    padding: 12px 10px;
+    text-align: left;
+    font-size: 14px;
 }
 
 th {
-  background: #f5f5f5;
-  font-weight: bold;
+    background: #f5f5f5;
+    font-weight: bold;
 }
 
-tr:hover{
-  transform: translateY(-3px);
-  transition: all 0.3s ease;
+tr:hover {
+    transform: translateY(-3px);
+    transition: all 0.3s ease;
+    background-color: #f5f5f5;
+}
+
+td.appointment-date {
+    color: rgb(183, 114, 114);
+    background-color: #adadad73;
+    font-weight: bold;
 }
 
 #emptyHistoryMsg {
@@ -119,13 +128,12 @@ tr:hover{
     color: #888;
 }
 
-.hero
-{
+.hero {
     display: flex;
     flex-direction: column;
 }
 
-.filter{
+.filter {
     display: flex;
     margin-left: 6px;
     margin-top: 10px;
@@ -136,7 +144,7 @@ tr:hover{
     border-radius: 6px;
 }
 
-#apply-filter{
+#apply-filter {
     margin-left: 20px;
     margin-top: 10px;
     border: none;
@@ -148,8 +156,171 @@ tr:hover{
     color: #fff;
 }
 
-#apply-filter:hover{
+#apply-filter:hover {
     background-color: #005dc1;
 }
 
+.action-btn {
+    display: none;
+}
+.btns{
+    display: none;
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+@media (min-width:426px) and (max-width:768px) {
+
+    .header{
+        margin: 10px;
+    }
+
+    .action-btn {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        border: none;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btns{
+        display: flex;
+        width: 80%;
+        margin: 6px;
+        border-radius: 6px;
+        font-size: 16px;
+        justify-content: center;
+    }
+
+    .cancel-booking-btn {
+        display: none;
+    }
+
+    .reschedule-booking-btn {
+        display: none;
+    }
+}
+
+@media (min-width:321px) and (max-width : 426px) {
+    .header {
+        height: 30%;
+        justify-content: space-evenly;
+        padding: 10px;
+    }
+
+    .headerTitle {
+        font-size: large;
+    }
+
+    .nav-btn {
+        margin-left: 20%;
+    }
+
+    .filter {
+        margin-left: 4px;
+        margin-top: 0px;
+        gap: 5px;
+    }
+
+    #apply-filter {
+        margin-left: 3px;
+        margin-top: 0px;
+    }
+
+    .slotHistory {
+        height: 100%;
+    }
+
+    th,
+    td {
+        font-size: 10px;
+    }
+
+    .action-btn {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        border: none;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btns{
+        display: flex;
+        width: 80%;
+        margin: 6px;
+        border-radius: 6px;
+        justify-content: center;
+    }
+
+    .cancel-booking-btn {
+        display: none;
+    }
+
+    .reschedule-booking-btn {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width:376px) {
+
+    .headerTitle{
+        width: 30%;
+        font-size: small;
+    }
+
+    .nav-btn{
+        width: 60%;
+        margin-left: 0%;
+    }
+
+    .filter{
+        margin-left: 5px;
+        padding: 6px 6px;
+        font-size: 10px;
+    }
+    #apply-filter{
+        margin-left: 4px;
+        padding: 6px 6px;
+        font-size: 10px;
+    }
+
+    th, td{
+        font-size: 10px;
+    }
+
+    .action-btn {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        border: none;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btns{
+        display: flex;
+        width: 80%;
+        margin: 6px;
+        border-radius: 6px;
+        justify-content: center;
+    }
+
+    .cancel-booking-btn {
+        display: none;
+    }
+
+    .reschedule-booking-btn {
+        display: none;
+    }
+}
 

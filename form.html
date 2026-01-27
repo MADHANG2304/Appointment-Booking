@@ -2,6 +2,8 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Appointment Booking</title>
     <link rel="stylesheet" href="/index.css">
 </head>
@@ -39,10 +41,10 @@
                         </select>
                         <p id="services-error"></p>
                         
-                        <input type="date" id="date" min="2026-01-23" max="2026-06-30" />
+                        <input type="date" id="date" min="2026-01-27" max="2026-06-30" />
                         
                         <h4>Available Slots</h4>   
-                        <p id="error-msg">No Slots Found</p>
+                        <p id="error-msg">Please Select Date !</p>
                         <p id="show-date"></p>
                         <div id="slots-container">
                             <div id="slot-error">No Slots Available</div>
@@ -56,6 +58,10 @@
                             <button type="button" class="btn" id="saveBtn" disabled>Book</button>
                             <button type="reset" class="btn" id="cancelBtn">Cancel</button>
                         </div>
+                    </form>
+                    <form class="error-div" id="error-div-id">
+                        <h1 id="id-error">No data Found!</h1>
+                        <button id="go-back" type="button">Go back</button>
                     </form>
                 </div>
             </div>
