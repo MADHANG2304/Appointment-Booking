@@ -48,7 +48,12 @@ cancelBtn.onclick = () => {
     if (window.location.href.includes("?")) {
         window.location.href = "historyTable.html";
     }
-    else if (window.location.href === "http://127.0.0.1:5500/form.html") {
+    // else if (window.location.href === "http://127.0.0.1:5500/form.html") {
+    //     console.log("Yes");
+    //     localStorage.removeItem("service");
+    //     window.location.href = "index.html";
+    // }
+    else{
         console.log("Yes");
         localStorage.removeItem("service");
         window.location.href = "index.html";
@@ -78,7 +83,8 @@ const duration = 30;
 
 function generateTimeSlots(date) {
     slotContainer.innerHTML = "";
-
+    legendDiv.style.display = "flex";
+    
     const timeBooked = bookingsByDate[date] || [];
 
     let currentHour = startHour;
