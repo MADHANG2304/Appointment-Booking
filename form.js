@@ -65,7 +65,7 @@ saveBtn.onclick = () => {
         if (window.location.href.includes("?")) {
             window.location.href = "historyTable.html";
         }
-        else if (window.location.href === "http://127.0.0.1:5500/form.html") {
+        else{
             window.location.href = "index.html";
         }
         form.reset();
