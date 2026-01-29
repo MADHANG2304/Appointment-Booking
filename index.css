@@ -71,6 +71,7 @@ body {
     margin: 10px;
     margin-right: 7%;
     width: 40%;
+    border-radius: 50%;
 }
 
 .hero-text {
@@ -128,7 +129,7 @@ body {
     align-items: center;
 }
 
-.error-div{
+.error-div {
     display: none;
     flex-direction: column;
     align-items: center;
@@ -140,7 +141,7 @@ body {
     width: 500px;
 }
 
-#go-back{
+#go-back {
     width: 30%;
     background-color: #007bff;
     color: white;
@@ -167,7 +168,7 @@ body {
 #detailsForm select,
 #detailsForm date,
 #detailsForm textarea {
-    padding: 10px 12px;
+    padding: 6px 8px;
     border-radius: 6px;
     border: 1px solid #ccc;
     font-size: 14px;
@@ -177,8 +178,8 @@ body {
 
 #detailsForm .btn {
     width: 48%;
-    padding: 10px 0;
-    font-size: 14px;
+    padding: 8px 0;
+    font-size: 12px;
     border: none;
     border-radius: 6px;
     transition: 0.2s;
@@ -207,10 +208,9 @@ body {
 .lgd-btn {
     background-color: #007bff;
     color: white;
-    padding: 10px 15px;
+    padding: 8px 12px;
     border: none;
     border-radius: 5px;
-    cursor: not-allowed;
     font-size: 14px;
     transition: background-color 0.3s;
 }
@@ -225,7 +225,6 @@ body {
 }
 
 #saveBtn {
-    background: #007bff;
     color: white;
     cursor: not-allowed;
     margin-right: 4%;
@@ -238,6 +237,7 @@ body {
 #cancelBtn {
     background: #e74c3c;
     color: white;
+    cursor: pointer;
 }
 
 #cancelBtn:hover {
@@ -252,6 +252,7 @@ body {
 
 #slots-container {
     display: flex;
+    width: 100%;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
@@ -264,11 +265,11 @@ body {
 .time-slot {
     background-color: #007bff;
     color: white;
-    padding: 10px 15px;
+    padding: 5px 7px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 11px;
     transition: background-color 0.3s;
 }
 
@@ -299,8 +300,8 @@ body {
 }
 
 .clear-btn {
-    margin-top: 10px;
-    padding: 8px 12px;
+    /* margin-top: 10px; */
+    padding: 5px 7px;
     background-color: #dc3545;
     color: white;
     border: none;
@@ -387,7 +388,7 @@ tr:hover {
     color: #888;
 }
 
-#id-error{
+#id-error {
     display: none;
     text-align: center;
 }
@@ -396,6 +397,11 @@ tr:hover {
 @media (min-width:426px) and (max-width:768px) {
     .header {
         margin: 10px;
+    }
+
+    .nav-btn {
+        width: 35%;
+        margin-left: 0%;
     }
 
     .hero-inner {
@@ -414,9 +420,17 @@ tr:hover {
     .modal-overlay {
         overflow-y: auto;
     }
-    
-    #detailsForm{
-        width: 400px;
+
+    #name-error,
+    #email-error,
+    #number-error,
+    #services-error {
+        text-align: center;
+        font-size: x-small;
+    }
+
+    #detailsForm {
+        width: 550px;
     }
 
     #detailsForm input,
@@ -434,31 +448,32 @@ tr:hover {
     }
 
     .lgd-btn {
-        padding: 10px 12px;
+        padding: 6px 10px;
         font-size: 10px;
     }
 
     .time-slot {
-        padding: 10px 12px;
+        padding: 6px 8px;
         font-size: 10px;
     }
 
     .clear-btn {
         padding: 5px 10px;
         font-size: 10px;
-        margin-top: 5px;
+        margin-top: 1px;
     }
 
-     h4 {
+    h4 {
         font-size: 16px;
     }
 
-    #show-date{
+    #show-date {
         font-size: 14px;
     }
 
     #detailsForm .btn {
         font-size: 12px;
+        padding: 6px 0;
     }
 
 }
@@ -527,7 +542,7 @@ tr:hover {
 
     #detailsForm {
         width: 270px;
-        padding-top: 35px;
+        padding-top: 10px;
     }
 
     .hero h2 {
@@ -538,7 +553,14 @@ tr:hover {
     #detailsForm select,
     #detailsForm date,
     #detailsForm textarea {
-        padding: 6px 4px;
+        padding: 4px 4px;
+        font-size: 10px;
+    }
+
+    #name-error,
+    #email-error,
+    #number-error,
+    #services-error {
         font-size: 10px;
     }
 
@@ -546,6 +568,7 @@ tr:hover {
         margin-top: 3px;
         margin-bottom: 2px;
         justify-content: space-evenly;
+        font-size: 12px;
     }
 
     .lgd-btn {
@@ -553,8 +576,13 @@ tr:hover {
         font-size: 10px;
     }
 
+    #slots-container{
+        justify-content: left;
+        gap: 5px;
+    }
+
     .time-slot {
-        padding: 5px 10px;
+        padding: 5px 7px;
         font-size: 10px;
     }
 
@@ -570,15 +598,16 @@ tr:hover {
     }
 
     h4 {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     #detailsForm .btn {
         width: 25%;
-        font-size: 12px;
+        font-size: 10px;
+        padding: 6px 0px;
     }
 
-    #show-date{
+    #show-date {
         font-size: 12px;
     }
 }

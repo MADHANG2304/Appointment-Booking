@@ -23,7 +23,7 @@
             <div id="modal" class="modal-overlay">
                 <div class="form-div">
                     <form id="detailsForm" >
-                        <h2>Book An Appointment</h2>
+                        <h2 id="form-header">Book An Appointment</h2>
                         <input type="text" id="name" placeholder="Enter Your Name" autocomplete="off" >
                         <p id="name-error"></p>
                         
@@ -41,7 +41,7 @@
                         </select>
                         <p id="services-error"></p>
                         
-                        <input type="date" id="date" min="2026-01-27" max="2026-06-30" />
+                        <input type="date" id="date" min="2026-01-29" max="2026-06-30" />
                         
                         <h4>Available Slots</h4>   
                         <p id="error-msg">Please Select Date !</p>
@@ -50,18 +50,21 @@
                             <div id="slot-error">No Slots Available</div>
                         </div>
                         <div class="legend" id="legend">
-                            <div class="lgd-btn">Available</div>
-                            <div class="booked lgd-btn">Booked</div>
-                            <div class="selected lgd-btn">Selected</div>
+                            <div class="lgd-btn"></div>
+                            <p>Available</p>
+                            <div class="booked lgd-btn"></div>
+                            <p>Booked</p>
+                            <div class="selected lgd-btn"></div>
+                            <p>Selected</p>
                         </div>
                         <div class="modal-buttons">
-                            <button type="button" class="btn" id="saveBtn" disabled>Book</button>
+                            <button type="button" class="btn" id="saveBtn">Book</button>
                             <button type="reset" class="btn" id="cancelBtn">Cancel</button>
                         </div>
                     </form>
                     <form class="error-div" id="error-div-id">
                         <h1 id="id-error">No data Found!</h1>
-                        <button id="go-back" type="button">Go back</button>
+                        <button id="go-back" type="button">Go Home</button>
                     </form>
                 </div>
             </div>

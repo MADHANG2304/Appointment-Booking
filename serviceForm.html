@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Handle Form</title>
+    <link rel="stylesheet" href="./service.css">
+</head>
+
+<body>
+    <div class="hero">
+        <img src="./assets/blur-hospital.jpg">
+        <div id="modal" class="modal-overlay">
+            <div class="form-div">
+                <form id="serviceForm">
+                    <h2 id="form-header">Choose An Appointment</h2>
+
+                    <select id="services" name="category">
+                        <option value="" disabled selected>Select Services</option>
+                        <option value="Consultant">Consultant</option>
+                        <option value="CheckUp">CheckUp</option>
+                        <option value="Full Body CheckUp">Full Body Checkup</option>
+                    </select>
+                    <span id="error-msg">Service should be selected</span>
+                    <div class="modal-buttons">
+                        <button type="button" class="btn" id="saveBtn">Confirm</button>
+                        <button type="reset" class="btn" id="cancelBtn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/serviceForm.js"></script>
+</body>
+
+</html>

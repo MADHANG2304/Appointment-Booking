@@ -26,24 +26,25 @@
                 <div>
                     <select id="date" class="filter">
                         <option value="none" disabled selected>Date</option>
-                        <option value="2026-01-27">27-01-2026</option>
-                        <option value="2026-01-28">28-01-2026</option>
+                        <option value="none">All Dates</option>
                         <option value="2026-01-29">29-01-2026</option>
                         <option value="2026-01-30">30-01-2026</option>
                         <option value="2026-01-31">31-01-2026</option>
-                        <option value="none">All Dates</option>
+                        <option value="2026-02-01">01-02-2026</option>
+                        <option value="2026-02-02">02-02-2026</option>
                     </select>
                 </div>
                 <div>
                     <select id="services" class="filter">
                         <option value="none" disabled selected>Services</option>
+                        <option value="none">All Services</option>
                         <option value="Consultant">Consultant</option>
                         <option value="CheckUp">CheckUp</option>
-                        <option value="Full Body Checkup">Full Body Checkup</option>
-                        <option value="none">All Services</option>
+                        <option value="Full Body CheckUp">Full Body Checkup</option>
                     </select>
                 </div>
                 <button type="button" id="apply-filter">Apply Filter</button>
+                <button type="button" id="clear-filter">Clear</button>
             </div>
 
             <div class="slotHistory">
@@ -60,7 +61,7 @@
                         </tr>
                     </thead>
                     <tbody id="historyTableBody">
-                        <!-- History entries will be populated here -->
+                        
                     </tbody>
                 </table>
                 <p id="emptyHistoryMsg">No booking history available.</p>

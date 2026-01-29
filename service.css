@@ -1,0 +1,117 @@
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.hero img{
+    height: 100vh;
+    width: 100%;
+}
+
+.modal-overlay {
+    height: 80%;
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: #fff; */
+}
+
+#modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: #ccc; */
+    justify-content: center;
+    align-items: center;
+}
+
+#serviceForm {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    color: #333;
+    padding: 20px;
+    gap: 15px;
+    border-radius: 10px;
+    width: 500px;
+}
+
+#serviceForm input,
+#serviceForm select,
+#serviceForm date,
+#serviceForm textarea {
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+
+#serviceForm .btn {
+    width: 48%;
+    padding: 8px 0;
+    font-size: 12px;
+    border: none;
+    border-radius: 6px;
+    transition: 0.2s;
+} 
+
+#form-header{
+    margin: 0;
+}
+
+.modal-buttons{
+    display: flex;
+}
+
+#saveBtn {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    margin-right: 4%;
+}
+
+#saveBtn:hover {
+    background: #005dc1;
+}
+
+#cancelBtn {
+    background: #e74c3c;
+    color: white;
+    cursor: pointer;
+}
+
+#cancelBtn:hover {
+    background: #c0392b;
+}
+
+#error-msg{
+    display: none;
+    color: red;
+    text-align: center;
+    font-size: small;
+}
+
+@media (min-width:321px) and (max-width : 426px){
+    #serviceForm{
+        width: 250px;
+    }
+}
+@media screen and (max-width : 320px){
+    #form-header{
+        font-size: 16px;
+    }
+    #serviceForm{
+        width: 150px;
+    }
+
+    #serviceForm .btn{
+        font-size: 10px;
+    }
+}

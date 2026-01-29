@@ -7,8 +7,10 @@ const saveBtn = document.getElementById("saveBtn");
 const cancelBtn = document.getElementById("cancelBtn");
 const modal = document.getElementById("modal");
 const applyBtn = document.getElementById("apply-filter");
+const clearBtn = document.getElementById("clear-filter");
 
 let completedDate = [];
+let isFilterApplied = false;
 
 home.addEventListener("click", () => {
     window.location.href = "index.html";
@@ -34,16 +36,16 @@ window.onload = () => {
         applyBtn.style.cursor = "pointer";
     }
     emptyHistoryMsg.style.display = "none";
+
     generateTable();
 }
 
 function makeOrder() {
-    if(userBooking != null)
-    {
+    if (userBooking != null) {
         userBooking.sort((a, b) => {
             const x = new Date(a.date);
             const y = new Date(b.date);
-    
+
             return x - y;
         })
     }
@@ -80,16 +82,16 @@ function renderTable(booking) {
             <td>${booking.selectedTime}</td>
             <td>${booking.number}</td>
             <td>
-            <button type="button" class="cancel-booking-btn" onclick="cancelBooking(${booking.id})">Cancel</button>
+            <button type="button" class="cancel-booking-btn" onclick="cancelBooking('${booking.id}')">Cancel</button>
             <a href = "form.html?${booking.id}">
                 <button type="button" class="reschedule-booking-btn">Reschedule</button>
             </a>
-            <button class="action-btn" aria-label="Update and Delete">
-            <button class="btns" onclick="cancelBooking(${booking.id})"><i class="fa fa-trash"></i></button>
+            <div class="action-btn">
+            <button class="btns" onclick="cancelBooking('${booking.id}')"><i class="fa fa-trash" title="Delete"></i></button>
             <a href = "form.html?${booking.id}">
-                <button class="btns"><i class="fa fa-edit"></i></button>
+                <button class="btns"><i class="fa fa-edit" title="Update"></i></button>
             </a>
-            </button>
+            </div>
             </td>
         `;
     historyTableBody.appendChild(row);
@@ -101,19 +103,24 @@ function cancelBooking(index) {
         let date;
         let selectedTime;
         userBooking.forEach(booking => {
-            if (booking.id == index) {
+            if (booking.id === index) {
                 date = booking.date;
                 selectedTime = booking.selectedTime;
             }
         })
 
-        userBooking = userBooking.filter((booking) => booking.id != index)
+        userBooking = userBooking.filter((booking) => booking.id !== index)
         localStorage.setItem("userBooking", JSON.stringify(userBooking));
 
         bookingsByDate[date] = bookingsByDate[date].filter(time => time != selectedTime);
         localStorage.setItem("bookingsByDate", JSON.stringify(bookingsByDate));
 
-        generateTable();
+        if (!isFilterApplied) {
+            generateTable();
+        }
+        else {
+            validate();
+        }
 
         if (userBooking.length === 0) {
             emptyHistoryMsg.style.display = "flex";
@@ -140,45 +147,49 @@ function cancelBooking(index) {
 
 }
 
-
-applyBtn.onclick = () => {
+function validate() {
     const date = document.getElementById("date").value;
     const services = document.getElementById("services").value;
     let isFound = false;
-    if(userBooking != null && userBooking.length != 0)
-    {
+
+    if (userBooking != null && userBooking.length != 0) {
         historyTableBody.innerHTML = "";
-    
+
         if (date == "none" && services == "none") {
             alert("Filter should be selected!");
             emptyHistoryMsg.style.display = "none"
+            clearBtn.style.display = "none"
             isFound = true
             generateTable();
         }
         else if (date == "none" && services == "") {
             alert("Filter should be filled!");
             emptyHistoryMsg.style.display = "none"
+            clearBtn.style.display = "none"
             isFound = true
             generateTable();
         }
         else if (date == "" && services == "none") {
             alert("Filter should be filled!");
             emptyHistoryMsg.style.display = "none"
+            clearBtn.style.display = "none"
             isFound = true
             generateTable();
         }
-    
+
         if (date == "" && services == "") {
             emptyHistoryMsg.style.display = "none"
+            clearBtn.style.display = "none"
             generateTable();
         }
-    
+
         else if (date != "" && (services == "" || services == "none")) {
             emptyHistoryMsg.style.display = "none"
             userBooking.forEach(booking => {
                 if (booking.date == date) {
                     renderTable(booking);
                     isFound = true;
+                    clearBtn.style.display = "flex"
                 }
             })
         }
@@ -187,11 +198,12 @@ applyBtn.onclick = () => {
             userBooking.forEach(booking => {
                 if (booking.services == services) {
                     renderTable(booking);
-                    isFound = true
+                    isFound = true;
+                    clearBtn.style.display = "flex"
                 }
             })
         }
-    
+
         else if (date != "" && services != "") {
             emptyHistoryMsg.style.display = "none"
             userBooking.forEach(booking => {
@@ -206,5 +218,27 @@ applyBtn.onclick = () => {
     if (!isFound) {
         emptyHistoryMsg.style.display = "flex"
         isFound = false;
+        isFilterApplied = false;
     }
+
+    return isFound;
+}
+
+
+applyBtn.onclick = () => {
+    if (validate()) {
+        isFilterApplied = true;
+    }
+    else {
+        isFilterApplied = false;
+        clearBtn.style.display = "none"
+    }
+}
+
+clearBtn.onclick = () => {
+    document.getElementById("date").value = "none";
+    document.getElementById("services").value = "none";
+    isFilterApplied = false;
+    clearBtn.style.display = "none";
+    generateTable();
 }
