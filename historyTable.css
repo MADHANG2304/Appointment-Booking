@@ -250,6 +250,49 @@ td.appointment-date {
     }
 }
 
+#toast-container{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.toast {
+    background-color: #333;
+    color: #fff;
+    padding: 16px;
+    border-radius: 5px;
+    min-width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateY(20px);
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.hide {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.toast.update {
+    /* background-color: #007bff; */
+    background-image: linear-gradient(to right, #007bff ,rgb(86, 86, 204));
+}
+
+.toast.delete {
+    background-image: linear-gradient(to right, #fc837a ,#e73f33);
+    /* background-color: #f44336; */
+}
+
+
 @media (min-width:321px) and (max-width : 426px) {
     .header {
         height: 30%;

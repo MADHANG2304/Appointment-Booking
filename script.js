@@ -9,6 +9,8 @@ const slotHistory = document.getElementById("history");
 const form = document.getElementById("detailsForm");
 const errorMsg = document.getElementById("error-msg");
 const startBtn = document.getElementById("start-btn");
+const toastContainer = document.getElementById("toast-container");
+const toastType = localStorage.getItem("toastType") || "";
 
 const userBooking = [
     {
@@ -105,11 +107,6 @@ const userBooking = [
 
 const bookingsByDate = JSON.parse(localStorage.getItem("bookingsByDate")) || {};
 
-// function hideAll() {
-//     slotContainer.innerHTML = "";
-//     errorMsg.style.display = "flex";
-//     form.reset();
-// }
 
 startBtn.onclick = () => {
     window.location.href = "serviceForm.html";
@@ -129,6 +126,36 @@ slotHistory.addEventListener("click", () => {
     window.location.href = "historyTable.html";
 });
 
+function showToast(type){
+    const toast = document.createElement("div");
+    toast.classList.add("toast");
+    toast.classList.add(type);
+
+    if(type == "success"){
+        toast.textContent = "Appointment Booked";
+    }
+    else if(type == "update"){
+        toast.textContent = "Appointment Updated";
+    }
+    else{
+        toast.textContent = "Error";
+    }
+
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add("show");
+    } , 10);
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+        toast.classList.add("hide");
+
+        setTimeout(() => {
+            toast.remove();
+        },500)
+    },3000);
+}
 
 window.onload = () => {
 
@@ -149,5 +176,11 @@ window.onload = () => {
             localStorage.setItem("bookingsByDate", JSON.stringify(bookingsByDate));
             localStorage.setItem("userBooking", JSON.stringify(userBooking));
         }
+    }
+
+    if(toastType != "" && toastType.length > 0)
+    {
+        showToast(toastType);
+        localStorage.removeItem("toastType");
     }
 }

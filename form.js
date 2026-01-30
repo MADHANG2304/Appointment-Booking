@@ -3,8 +3,6 @@ const slotContainer = document.getElementById("slots-container");
 const modal = document.getElementById("modal");
 const saveBtn = document.getElementById("saveBtn");
 const cancelBtn = document.getElementById("cancelBtn");
-const slotBook = document.getElementById("slotBook");
-const slotHistory = document.getElementById("history");
 const form = document.getElementById("detailsForm");
 const errorMsg = document.getElementById("error-msg");
 const showDate = document.getElementById("show-date");
@@ -31,17 +29,6 @@ function hideAll() {
     form.reset();
 }
 
-// slotBook.addEventListener("click", () => {
-//     modal.style.display = "flex";
-//     // saveBtn.disabled = true;
-//     // saveBtn.style.cursor = "not-allowed";
-//     hideAll();
-// })
-
-slotHistory.addEventListener("click", () => {
-    window.location.href = "historyTable.html";
-});
-
 cancelBtn.onclick = () => {
     legendDiv.style.display = "none"
     modal.style.display = "none";
@@ -54,7 +41,6 @@ cancelBtn.onclick = () => {
     //     window.location.href = "index.html";
     // }
     else{
-        console.log("Yes");
         localStorage.removeItem("service");
         window.location.href = "index.html";
     }
@@ -63,13 +49,18 @@ cancelBtn.onclick = () => {
 saveBtn.onclick = () => {
     if (addDetails()) {
         if (window.location.href.includes("?")) {
+            localStorage.setItem("toastType" , "update");
             window.location.href = "historyTable.html";
         }
         else{
+            localStorage.setItem("toastType" , "success");
             window.location.href = "index.html";
         }
         form.reset();
         modal.style.display = "none";
+    }
+    else{
+        localStorage.setItem("toastType" , "error");
     }
 }
 
@@ -89,7 +80,7 @@ function generateTimeSlots(date) {
 
     let currentHour = startHour;
     let currentMinute = 0;
-    while (currentHour < endHour || (currentHour === endHour && currentMinute === 0)) {
+    while (currentHour < endHour || (currentHour < endHour && currentMinute === 0)) {
         const time = new Date();
         const currTime = new Date();
         time.setHours(currentHour, currentMinute, 0, 0);
@@ -170,7 +161,7 @@ function addDetails() {
     const currDate = document.getElementById("date").value;
 
 
-    if (validateForm(name, email, number, services)) {
+    if (validateForm()) {
 
         if (isEdit) {
             userBooking.forEach(booking => {
@@ -227,9 +218,21 @@ function addDetails() {
     }
 }
 
-function validateForm(name, email, number, services) {
+function validateForm() {
     let isValid = true;
-    let nameRegex = /^[a-zA-Z0-9]+/;
+    if(!isValidName()) isValid = false; 
+    if(!isValidEmail()) isValid = false; 
+    if(!isValidNumber()) isValid = false; 
+    if(!isValidService()) isValid = false; 
+
+    return isValid;
+}
+
+function isValidName(){
+    let isValid = true;
+    const name = document.getElementById("name").value;
+    let nameRegex = /^[a-zA-Z0-9]{2,}/;
+
     if (name == "" || name.length == 0) {
         isValid = false;
         document.getElementById("name-error").textContent = "Name should not be empty";
@@ -237,16 +240,19 @@ function validateForm(name, email, number, services) {
     }
     else if (!nameRegex.test(name)) {
         isValid = false;
-        document.getElementById("name-error").textContent = "Please enter valid Name";
+        document.getElementById("name-error").textContent = "Name should contains atleast 2 letters";
         document.getElementById("name-error").style.display = "flex";
     }
-    // else {
-    //     isValid = true;
-    //     document.getElementById("name-error").textContent = "";
-    //     document.getElementById("name-error").style.display = "none";
-    // }
 
-    let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (name.length > 0 && nameRegex.test(name)) document.getElementById("name-error").style.display = "none";
+
+    return isValid;
+}
+
+function isValidEmail(){
+    let isValid = true;
+    const email = document.getElementById("email").value;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (email == "" || email.length == 0) {
         isValid = false;
         document.getElementById("email-error").textContent = "Email should not be empty";
@@ -257,13 +263,16 @@ function validateForm(name, email, number, services) {
         document.getElementById("email-error").textContent = "Please enter valid email";
         document.getElementById("email-error").style.display = "flex";
     }
-    // else {
-    //     isValid = true;
-    //     document.getElementById("email-error").textContent = "";
-    //     document.getElementById("email-error").style.display = "none";
-    // }
 
-    let numberRegex = /^\d{10}$/;
+    if (emailRegex.test(email.trim())) document.getElementById("email-error").style.display = "none";
+
+    return isValid;
+}
+
+function isValidNumber(){
+    let isValid = true;
+    const number = document.getElementById("number").value;
+    const numberRegex = /^\d{10}$/;
     if (number == '' || number.length == 0) {
         isValid = false;
         document.getElementById("number-error").textContent = "Number should not be empty";
@@ -274,59 +283,39 @@ function validateForm(name, email, number, services) {
         document.getElementById("number-error").textContent = "Number should have 10 digits";
         document.getElementById("number-error").style.display = "flex";
     }
-    // else {
-    //     isValid = true;
-    //     document.getElementById("number-error").textContent = "";
-    //     document.getElementById("number-error").style.display = "none";
-    // }
 
+    if (numberRegex.test(number.trim())) document.getElementById("number-error").style.display = "none";
+
+    return isValid;
+}
+
+function isValidService(){
+    let isValid = true; 
+    const services = document.getElementById("services").value;
     if (services == "" || services.length == 0) {
         isValid = false;
         document.getElementById("services-error").textContent = "Select the services category";
         document.getElementById("services-error").style.display = "flex";
     }
-    // else {
-    //     isValid = true;
-    //     document.getElementById("services-error").textContent = "";
-    //     document.getElementById("services-error").style.display = "none";
-    // }
+    else if (services.trim().length > 0) document.getElementById("services-error").style.display = "none";
 
     return isValid;
 }
 
-document.getElementById("name").addEventListener("input", () => {
-    const name = document.getElementById("name").value;
-    let nameRegex = /^[a-zA-Z0-9]{2,}/;
-    if (name.length > 0 && nameRegex.test(name)) document.getElementById("name-error").style.display = "none";
-    else if (!nameRegex.test(name)) {
-        document.getElementById("name-error").textContent = "Name should contains atleast 2 letters";
-        document.getElementById("name-error").style.display = "flex";
-    }
+document.getElementById("name").addEventListener("blur", () => {
+    isValidName();
 });
 
-document.getElementById("email").addEventListener("input", () => {
-    const email = document.getElementById("email").value;
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (emailRegex.test(email.trim())) document.getElementById("email-error").style.display = "none";
-    else if (!emailRegex.test(email)) {
-        document.getElementById("email-error").textContent = "Please enter valid email";
-        document.getElementById("email-error").style.display = "flex";
-    }
+document.getElementById("email").addEventListener("blur", () => {
+    isValidEmail();
 });
 
-document.getElementById("number").addEventListener("input", () => {
-    const number = document.getElementById("number").value;
-    const numberRegex = /^\d{10}$/;
-    if (numberRegex.test(number.trim())) document.getElementById("number-error").style.display = "none";
-    else if (!numberRegex.test(number)) {
-        document.getElementById("number-error").textContent = "Number should have 10 digits";
-        document.getElementById("number-error").style.display = "flex";
-    }
+document.getElementById("number").addEventListener("blur", () => {
+    isValidNumber();
 });
 
-document.getElementById("services").addEventListener("change", () => {
-    const services = document.getElementById("services").value;
-    if (services.trim().length > 0) document.getElementById("services-error").style.display = "none";
+document.getElementById("services").addEventListener("blur", () => {
+    isValidService();   
 });
 
 
@@ -358,7 +347,6 @@ function reschedule() {
     }
     modal.style.display = "flex";
 }
-
 
 window.onload = () => {
     idURL = window.location.href;

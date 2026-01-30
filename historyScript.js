@@ -8,11 +8,13 @@ const cancelBtn = document.getElementById("cancelBtn");
 const modal = document.getElementById("modal");
 const applyBtn = document.getElementById("apply-filter");
 const clearBtn = document.getElementById("clear-filter");
+const toastContainer = document.getElementById("toast-container");
+const toastType = localStorage.getItem("toastType") || "";
 
 let completedDate = [];
 let isFilterApplied = false;
 
-home.addEventListener("click", () => {
+home.addEventListener("click", () => {  
     window.location.href = "index.html";
 });
 
@@ -26,17 +28,23 @@ window.onload = () => {
     if (userBooking == null || userBooking.length === 0) {
         emptyHistoryMsg.style.display = "flex";
         applyBtn.style.cursor = "not-allowed"
+        localStorage.removeItem("userBooking");
         return;
     }
-    if (userBooking.length === 0) {
-        emptyHistoryMsg.style.display = "flex";
-        localStorage.removeItem("userBooking");
-    }
+    // if (userBooking.length === 0) {
+    //     emptyHistoryMsg.style.display = "flex";
+    // }
     else {
         applyBtn.style.cursor = "pointer";
     }
-    emptyHistoryMsg.style.display = "none";
 
+    if(toastType != "" && toastType.length > 0)
+    {
+        showToast(toastType);
+        localStorage.removeItem("toastType");
+    }
+    
+    emptyHistoryMsg.style.display = "none";
     generateTable();
 }
 
@@ -143,6 +151,8 @@ function cancelBooking(index) {
         else {
             localStorage.setItem("bookingsByDate", JSON.stringify(bookingsByDate));
         }
+
+        showToast("delete");
     }
 
 }
@@ -241,4 +251,31 @@ clearBtn.onclick = () => {
     isFilterApplied = false;
     clearBtn.style.display = "none";
     generateTable();
+}
+
+function showToast(type){   
+    const toast = document.createElement("div");
+    toast.classList.add("toast");
+    toast.classList.add(type);
+
+    if(type == "update"){
+        toast.textContent = "Appointment Updated";
+    }
+    else if(type == "delete"){
+        toast.textContent = "Appointment Deleted";
+    }
+    else{
+        toast.textContent = "Error";
+    }
+
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add("show");
+    } , 10);
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+        toast.classList.add("hide");
+    },3000);
 }
