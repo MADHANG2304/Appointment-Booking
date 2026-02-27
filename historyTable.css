@@ -23,6 +23,7 @@ body {
     justify-content: space-around;
     align-items: center;
     padding: 10px;
+    font-family: "Futura", "Trebuchet MS", Arial, sans-serif;
 }
 
 .headerTitle{
@@ -36,6 +37,7 @@ body {
     gap: 10px;
     padding: 10px 0;
     margin-left: 40%;
+    font-family: "Futura", "Trebuchet MS", Arial, sans-serif;
 }
 
 .nav-btn .btn {
@@ -45,6 +47,7 @@ body {
     border: none;
     border-radius: 6px;
     transition: 0.2s;
+    font-family: "Futura", "Trebuchet MS", Arial, sans-serif;
 }
 
 .nav-btn .btn:hover {
@@ -63,9 +66,13 @@ body {
     transition: background-color 0.3s;
 }
 
+.cancel-booking-btn:hover{
+    background-color: #daa403;
+}
+
 .reschedule-booking-btn {
+    background-color: #07bbd7;
     padding: 5px 10px;
-    background-color: #17a2b8;
     color: white;
     border: none;
     border-radius: 5px;
@@ -74,8 +81,12 @@ body {
     transition: background-color 0.3s;
 }
 
+.reschedule-booking-btn:hover{
+    background-color: #17a2b8;
+}
+
+
 .slotHistory {
-    /* height: 100vh; */
     height: 70vh;
     background-color: #f9f9f9;
     margin: 20px;
@@ -86,7 +97,6 @@ body {
 
 #historyTable {
     width: 100%;
-    border-collapse: collapse;
 }
 
 
@@ -110,8 +120,6 @@ th {
 }
 
 tr:hover {
-    /* transform: translateY(-3px);
-    transition: all 0.3s ease; */
     background-color: #f5f5f5;
 }
 
@@ -144,8 +152,8 @@ td.appointment-date {
     border: none;
     padding: 8px 12px;
     font-size: 14px;
-    /* cursor: pointer; */
     border-radius: 6px;
+    font-family: "Futura", "Trebuchet MS", Arial, sans-serif;
 }
 
 #apply-filter {
@@ -158,6 +166,7 @@ td.appointment-date {
     border-radius: 6px;
     background-color: #007bff;
     color: #fff;
+    font-family: "Futura", "Trebuchet MS", Arial, sans-serif;
 }
 
 #date{
@@ -184,6 +193,7 @@ td.appointment-date {
     background: #e74c3c;
     color: white;
     cursor: pointer;
+    font-family: "Futura", "Trebuchet MS", Arial, sans-serif;
 }
 
 #clear-filter:hover {
@@ -208,46 +218,6 @@ td.appointment-date {
 #historyTable thead tr{
     position: sticky;
     top: 0;
-}
-
-@media (min-width:426px) and (max-width:768px) {
-
-    .header {
-        margin: 10px;
-    }
-
-    .nav-btn {
-        width: 50%;
-        margin-left: 0;
-    }
-
-
-    .action-btn {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        border: none;
-        justify-content: center;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .btns {
-        display: flex;
-        width: 80%;
-        margin: 6px;
-        border-radius: 6px;
-        font-size: 16px;
-        justify-content: center;
-    }
-
-    .cancel-booking-btn {
-        display: none;
-    }
-
-    .reschedule-booking-btn {
-        display: none;
-    }
 }
 
 #toast-container{
@@ -292,6 +262,45 @@ td.appointment-date {
     /* background-color: #f44336; */
 }
 
+@media (min-width:426px) and (max-width:768px) {
+
+    .header {
+        margin: 10px;
+    }
+
+    .nav-btn {
+        width: 50%;
+        margin-left: 0;
+    }
+
+
+    .action-btn {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        border: none;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .btns {
+        display: flex;
+        width: 80%;
+        margin: 6px;
+        border-radius: 6px;
+        font-size: 16px;
+        justify-content: center;
+    }
+
+    .cancel-booking-btn {
+        display: none;
+    }
+
+    .reschedule-booking-btn {
+        display: none;
+    }
+}
 
 @media (min-width:321px) and (max-width : 426px) {
     .header {

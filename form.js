@@ -35,11 +35,6 @@ cancelBtn.onclick = () => {
     if (window.location.href.includes("?")) {
         window.location.href = "historyTable.html";
     }
-    // else if (window.location.href === "http://127.0.0.1:5500/form.html") {
-    //     console.log("Yes");
-    //     localStorage.removeItem("service");
-    //     window.location.href = "index.html";
-    // }
     else{
         localStorage.removeItem("service");
         window.location.href = "index.html";
@@ -51,6 +46,7 @@ saveBtn.onclick = () => {
         if (window.location.href.includes("?")) {
             localStorage.setItem("toastType" , "update");
             window.location.href = "historyTable.html";
+            console.log("Yes");
         }
         else{
             localStorage.setItem("toastType" , "success");
@@ -70,9 +66,9 @@ goBackBtn.onclick = () => {
 
 const startHour = 10;
 const endHour = 18;
-const duration = 30;
+const duration = 60;
 
-function generateTimeSlots(date) {
+function generateTimeSlots(date) {  
     slotContainer.innerHTML = "";
     legendDiv.style.display = "flex";
     
@@ -84,7 +80,7 @@ function generateTimeSlots(date) {
         const time = new Date();
         const currTime = new Date();
         time.setHours(currentHour, currentMinute, 0, 0);
-        currTime.setHours(currentHour, currentMinute + 30, 0, 0);
+        currTime.setHours(currentHour, currentMinute + duration, 0, 0);
 
         const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         const lastTime = currTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
@@ -96,7 +92,7 @@ function generateTimeSlots(date) {
         slotButton.type = "button";
         slotButton.classList.add('time-slot');
 
-        if(currUser != null && currUser.selectedTime == formattedTime && timeBooked.includes(currUser.selectedTime))
+        if(currUser != null && date == currUser.date && currUser.selectedTime == formattedTime)
         {
             slotButton.classList.add("selected");
         }
@@ -182,7 +178,7 @@ function addDetails() {
                     booking.email = email;
                     booking.number = number;
                     booking.services = services;
-                    booking.date = currDate;
+                    booking.date = currDate; 
                     booking.selectedTime = selectedTime;
                 }
             })
@@ -231,7 +227,7 @@ function validateForm() {
 function isValidName(){
     let isValid = true;
     const name = document.getElementById("name").value;
-    let nameRegex = /^[a-zA-Z0-9]{2,}/;
+    let nameRegex = /^[a-zA-Z0-9]{3,}/;
 
     if (name == "" || name.length == 0) {
         isValid = false;
@@ -302,21 +298,13 @@ function isValidService(){
     return isValid;
 }
 
-document.getElementById("name").addEventListener("blur", () => {
-    isValidName();
-});
+document.getElementById("name").addEventListener("blur", () => {isValidName();});
 
-document.getElementById("email").addEventListener("blur", () => {
-    isValidEmail();
-});
+document.getElementById("email").addEventListener("blur", () => {isValidEmail();});
 
-document.getElementById("number").addEventListener("blur", () => {
-    isValidNumber();
-});
+document.getElementById("number").addEventListener("blur", () => {isValidNumber();});
 
-document.getElementById("services").addEventListener("blur", () => {
-    isValidService();   
-});
+document.getElementById("services").addEventListener("blur", () => {isValidService();});
 
 
 function reschedule() {
@@ -348,20 +336,33 @@ function reschedule() {
     modal.style.display = "flex";
 }
 
+function formatDate(date){
+    const year = String(date.getFullYear());
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2,'0');
+
+    return `${year}-${month}-${day}`;
+}
+
 window.onload = () => {
+    const today = new Date();
+    const formatedDate = formatDate(today);
+    document.getElementById("date").setAttribute('min' , formatedDate);
+
     idURL = window.location.href;
+    
     errorMsg.style.display = "flex";
     if (idURL.includes("?")) {
         editIndex = idURL.split("?")[1];
         reschedule();
     }
+    
     saveBtn.disabled = true;
     saveBtn.style.backgroundColor = "#e0e0e0"
+    
     if(localStorage.getItem("service")){
         tempServices = localStorage.getItem("service");
         document.getElementById("services").value = tempServices;
     }
-    else{
-        document.getElementById.value = "";
-    }
+
 }

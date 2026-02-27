@@ -226,14 +226,13 @@ function validate() {
     }
 
     if (!isFound) {
-        emptyHistoryMsg.style.display = "flex"
+        // emptyHistoryMsg.style.display = "flex"
         isFound = false;
         isFilterApplied = false;
     }
 
     return isFound;
 }
-
 
 applyBtn.onclick = () => {
     if (validate()) {
@@ -277,5 +276,9 @@ function showToast(type){
     setTimeout(() => {
         toast.classList.remove("show");
         toast.classList.add("hide");
+
+        setTimeout(() => {
+            toast.remove();
+        },500)
     },3000);
 }
