@@ -46,12 +46,12 @@ saveBtn.onclick = () => {
         if (window.location.href.includes("?")) {
             localStorage.setItem("toastType" , "update");
             window.location.href = "historyTable.html";
-            console.log("Yes");
         }
         else{
             localStorage.setItem("toastType" , "success");
-            window.location.href = "index.html";
+            // window.location.href = "index.html";
         }
+        window.location.href = "historyTable.html";
         form.reset();
         modal.style.display = "none";
     }
@@ -69,78 +69,97 @@ const endHour = 18;
 const duration = 60;
 
 function generateTimeSlots(date) {  
-    slotContainer.innerHTML = "";
-    legendDiv.style.display = "flex";
+    if(!isValidDate(date)){
+        document.getElementById("date-error").textContent = "Date should not be past";
+        document.getElementById("date-error").style.display = "flex";
+        slotContainer.innerHTML = "";
+        legendDiv.style.display = "none";
+        document.getElementById("show-date").textContent = "";
+        document.getElementById("show-date").display = "none";
+        return;
+    }
+    else{
+        document.getElementById("date-error").textContent = "";
+        document.getElementById("date-error").style.display = "none";
+        
+        slotContainer.innerHTML = "";
+        legendDiv.style.display = "flex";
+        
+        const timeBooked = bookingsByDate[date] || [];
     
-    const timeBooked = bookingsByDate[date] || [];
-
-    let currentHour = startHour;
-    let currentMinute = 0;
-    while (currentHour < endHour || (currentHour < endHour && currentMinute === 0)) {
-        const time = new Date();
-        const currTime = new Date();
-        time.setHours(currentHour, currentMinute, 0, 0);
-        currTime.setHours(currentHour, currentMinute + duration, 0, 0);
-
-        const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        const lastTime = currTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-
-
-        const slotButton = document.createElement("button");
-        slotButton.value = formattedTime;
-        slotButton.textContent = `${formattedTime} - ${lastTime}`;
-        slotButton.type = "button";
-        slotButton.classList.add('time-slot');
-
-        if(currUser != null && date == currUser.date && currUser.selectedTime == formattedTime)
-        {
-            slotButton.classList.add("selected");
+        let currentHour = startHour;
+        let currentMinute = 0;
+        while (currentHour < endHour || (currentHour < endHour && currentMinute === 0)) {
+            const time = new Date();
+            const currTime = new Date();
+            time.setHours(currentHour, currentMinute, 0, 0);
+            currTime.setHours(currentHour, currentMinute + duration, 0, 0);
+    
+            const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const lastTime = currTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    
+    
+            const slotButton = document.createElement("button");
+            slotButton.value = formattedTime;
+            slotButton.textContent = `${formattedTime} - ${lastTime}`;
+            slotButton.type = "button";
+            slotButton.classList.add('time-slot');
+    
+            if(currUser != null && date == currUser.date && currUser.selectedTime == formattedTime)
+            {
+                slotButton.classList.add("selected");
+            }
+            else if (timeBooked.includes(formattedTime)) {
+                slotButton.classList.add("booked");
+                slotButton.disabled = true;
+            }
+    
+            let dateStr = date.split("-");
+            let currYear = dateStr[0]
+            let currMonth = dateStr[1]
+            let currDay = dateStr[2]
+            showDate.textContent = `Date: ${currDay}-${currMonth}-${currYear}`;
+    
+            slotContainer.appendChild(slotButton);
+    
+            currentMinute += duration;
+            if (currentMinute >= 60) {
+                currentHour += 1;
+                currentMinute %= 60;
+            }
         }
-        else if (timeBooked.includes(formattedTime)) {
-            slotButton.classList.add("booked");
-            slotButton.disabled = true;
-        }
-
-        showDate.textContent = `Date: ${date}`;
-
-        slotContainer.appendChild(slotButton);
-
-        currentMinute += duration;
-        if (currentMinute >= 60) {
-            currentHour += 1;
-            currentMinute %= 60;
-        }
+    
+        const clearBtn = document.createElement("button");
+        clearBtn.textContent = "Clear";
+        clearBtn.type = "button";
+        clearBtn.classList.add("clear-btn");
+        slotContainer.appendChild(clearBtn);
+    
+    
+        const slotButtons = document.querySelectorAll(".time-slot");
+    
+        slotButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                slotButtons.forEach(btn => btn.classList.remove("selected"));
+                button.classList.add("selected");
+                saveBtn.disabled = false;
+                saveBtn.style.cursor = "pointer";
+                selectedTime = button.value;
+                saveBtn.style.backgroundColor = "#007bff";
+    
+            })
+        })
+    
+        clearBtn.addEventListener("click", () => {
+            const slotButtons = document.querySelectorAll(".time-slot");
+            slotButtons.forEach(btn => btn.classList.remove("selected"));
+            selectedTime = null;
+            saveBtn.disabled = true;
+            saveBtn.style.cursor = "not-allowed";
+            saveBtn.style.backgroundColor = "#e0e0e0";
+        });
     }
 
-    const clearBtn = document.createElement("button");
-    clearBtn.textContent = "Clear";
-    clearBtn.type = "button";
-    clearBtn.classList.add("clear-btn");
-    slotContainer.appendChild(clearBtn);
-
-
-    const slotButtons = document.querySelectorAll(".time-slot");
-
-    slotButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            slotButtons.forEach(btn => btn.classList.remove("selected"));
-            button.classList.add("selected");
-            saveBtn.disabled = false;
-            saveBtn.style.cursor = "pointer";
-            selectedTime = button.value;
-            saveBtn.style.backgroundColor = "#007bff";
-
-        })
-    })
-
-    clearBtn.addEventListener("click", () => {
-        const slotButtons = document.querySelectorAll(".time-slot");
-        slotButtons.forEach(btn => btn.classList.remove("selected"));
-        selectedTime = null;
-        saveBtn.disabled = true;
-        saveBtn.style.cursor = "not-allowed";
-        saveBtn.style.backgroundColor = "#e0e0e0";
-    });
 }
 
 dateBtn.addEventListener("change", () => {
@@ -296,6 +315,12 @@ function isValidService(){
     else if (services.trim().length > 0) document.getElementById("services-error").style.display = "none";
 
     return isValid;
+}
+
+function isValidDate(currDate){
+    let today =  formatDate(new Date());
+
+    return today <= currDate;
 }
 
 document.getElementById("name").addEventListener("blur", () => {isValidName();});

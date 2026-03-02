@@ -18,8 +18,8 @@ const userBooking = [
         name: "Madhan",
         email: "madhang2306@gmail.com",
         number: "9363234339",
-        services: "Consultant",
-        date: "2026-02-05",
+        services: "consultant",
+        date: "2026-03-05",
         selectedTime: "11:00"
     },
     {
@@ -27,8 +27,8 @@ const userBooking = [
         name: "Anitha",
         email: "anitha@gmail.com",
         number: "9876543210",
-        services: "CheckUp",
-        date: "2026-02-09",
+        services: "checkup",
+        date: "2026-03-09",
         selectedTime: "10:00"
     },
     {
@@ -36,8 +36,8 @@ const userBooking = [
         name: "Rahul",
         email: "rahul2306@gmail.com",
         number: "8667727297",
-        services: "Full Body CheckUp",
-        date: "2026-02-05",
+        services: "fullbodycheckup",
+        date: "2026-03-05",
         selectedTime: "12:00"
     },
     {
@@ -45,8 +45,8 @@ const userBooking = [
         name: "Karthik",
         email: "karthik@gmail.com",
         number: "9123456789",
-        services: "CheckUp",
-        date: "2026-02-09",
+        services: "checkup",
+        date: "2026-03-09",
         selectedTime: "11:30"
     },
     {
@@ -54,8 +54,8 @@ const userBooking = [
         name: "Suresh",
         email: "suresh@gmail.com",
         number: "9345678123",
-        services: "Consultant",
-        date: "2026-02-06",
+        services: "consultant",
+        date: "2026-03-06",
         selectedTime: "12:00"
     },
     {
@@ -63,8 +63,8 @@ const userBooking = [
         name: "Divya",
         email: "divya@gmail.com",
         number: "9567890123",
-        services: "CheckUp",
-        date: "2026-02-07",
+        services: "checkup",
+        date: "2026-03-07",
         selectedTime: "10:30"
     },
     {
@@ -72,8 +72,8 @@ const userBooking = [
         name: "Priya",
         email: "priya@gmail.com",
         number: "9012345678",
-        services: "Consultant",
-        date: "2026-02-06",
+        services: "consultant",
+        date: "2026-03-06",
         selectedTime: "10:00"
     },
     {
@@ -81,8 +81,8 @@ const userBooking = [
         name: "Arun",
         email: "arun@gmail.com",
         number: "9789012345",
-        services: "Full Body CheckUp",
-        date: "2026-02-07",
+        services: "fullbodycheckup",
+        date: "2026-03-07",
         selectedTime: "13:00"
     },
     {
@@ -90,8 +90,8 @@ const userBooking = [
         name: "Meena",
         email: "meena@gmail.com",
         number: "9890123456",
-        services: "Full Body CheckUp",
-        date: "2026-02-08",
+        services: "fullbodycheckup",
+        date: "2026-03-08",
         selectedTime: "10:30"
     },
     {
@@ -99,8 +99,8 @@ const userBooking = [
         name: "Vijay",
         email: "vijay@gmail.com",
         number: "9001234567",
-        services: "CheckUp",
-        date: "2026-02-08",
+        services: "checkup",
+        date: "2026-03-08",
         selectedTime: "11:30"
     }
 ];

@@ -199,7 +199,8 @@ body {
 #name-error,
 #email-error,
 #number-error,
-#services-error {
+#services-error,
+#date-error {
     display: none;
     color: red;
     text-align: center;

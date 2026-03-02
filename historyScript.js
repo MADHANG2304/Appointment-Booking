@@ -10,13 +10,22 @@ const applyBtn = document.getElementById("apply-filter");
 const clearBtn = document.getElementById("clear-filter");
 const toastContainer = document.getElementById("toast-container");
 const toastType = localStorage.getItem("toastType") || "";
+const dateBtn = document.getElementById("date");
 
 let completedDate = [];
 let isFilterApplied = false;
+let isFilterValueGenerated = false;
 
 home.addEventListener("click", () => {  
     window.location.href = "index.html";
 });
+
+dateBtn.onclick = () => {
+    if(!isFilterValueGenerated){
+        renderDates();
+        isFilterValueGenerated = true;
+    }
+}
 
 window.onload = () => {
     userBooking = JSON.parse(localStorage.getItem("userBooking"));
@@ -48,15 +57,33 @@ window.onload = () => {
     generateTable();
 }
 
-function makeOrder() {
-    if (userBooking != null) {
-        userBooking.sort((a, b) => {
-            const x = new Date(a.date);
-            const y = new Date(b.date);
+// function makeOrder() {
+//     if (userBooking != null) {
+//         userBooking.sort((a, b) => {
+//             const x = new Date(a.date);
+//             const y = new Date(b.date);
+//             return x - y;
+//         })
+//     }
+// }
 
-            return x - y;
-        })
-    }
+function makeOrder() {
+
+    if (!userBooking || userBooking.length === 0) return;
+
+    userBooking.sort((a, b) => {
+
+        const dateDiff = new Date(a.date) - new Date(b.date);
+        if (dateDiff !== 0) return dateDiff;
+
+        
+        if(a.selectedTime > b.selectedTime){
+            return 1;
+        }
+        else{
+            return -1;
+        }
+    });
 }
 
 function generateTable() {
@@ -157,6 +184,26 @@ function cancelBooking(index) {
 
 }
 
+function renderDates() {
+
+    const dateSelect = document.getElementById("date");
+
+    const uniqueDates = [...new Set(userBooking.map(item => item.date))];
+
+    uniqueDates.sort((a, b) => new Date(a) - new Date(b));
+
+    uniqueDates.forEach(date => {
+
+        const option = document.createElement("option");
+        option.value = date;
+
+        const [year, month, day] = date.split("-");
+        option.textContent = `${day}-${month}-${year}`;
+
+        dateSelect.appendChild(option);
+    });
+}
+
 function validate() {
     const date = document.getElementById("date").value;
     const services = document.getElementById("services").value;
@@ -164,28 +211,28 @@ function validate() {
 
     if (userBooking != null && userBooking.length != 0) {
         historyTableBody.innerHTML = "";
-
+        
+        clearBtn.style.display = "flex"
         if (date == "none" && services == "none") {
-            alert("Filter should be selected!");
             emptyHistoryMsg.style.display = "none"
             clearBtn.style.display = "none"
             isFound = true
             generateTable();
         }
-        else if (date == "none" && services == "") {
-            alert("Filter should be filled!");
-            emptyHistoryMsg.style.display = "none"
-            clearBtn.style.display = "none"
-            isFound = true
-            generateTable();
-        }
-        else if (date == "" && services == "none") {
-            alert("Filter should be filled!");
-            emptyHistoryMsg.style.display = "none"
-            clearBtn.style.display = "none"
-            isFound = true
-            generateTable();
-        }
+        // else if (date == "none" && services == "") {
+        //     alert("Filter should be filled!");
+        //     emptyHistoryMsg.style.display = "none"
+        //     clearBtn.style.display = "none"
+        //     isFound = true
+        //     generateTable();
+        // }
+        // else if (date == "" && services == "none") {
+        //     alert("Filter should be filled!");
+        //     emptyHistoryMsg.style.display = "none"
+        //     clearBtn.style.display = "none"
+        //     isFound = true
+        //     generateTable();
+        // }
 
         if (date == "" && services == "") {
             emptyHistoryMsg.style.display = "none"
@@ -213,7 +260,7 @@ function validate() {
                 }
             })
         }
-
+        
         else if (date != "" && services != "") {
             emptyHistoryMsg.style.display = "none"
             userBooking.forEach(booking => {
@@ -256,12 +303,16 @@ function showToast(type){
     const toast = document.createElement("div");
     toast.classList.add("toast");
     toast.classList.add(type);
+    console.log(type);
 
     if(type == "update"){
         toast.textContent = "Appointment Updated";
     }
     else if(type == "delete"){
         toast.textContent = "Appointment Deleted";
+    }
+    else if(type == "success"){
+        toast.textContent = "Appointment Booked";
     }
     else{
         toast.textContent = "Error";

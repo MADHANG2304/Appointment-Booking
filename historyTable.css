@@ -256,6 +256,9 @@ td.appointment-date {
     /* background-color: #007bff; */
     background-image: linear-gradient(to right, #007bff ,rgb(86, 86, 204));
 }
+.toast.success {
+    background-image: linear-gradient(to right, #26de51 ,#479f5b);
+}
 
 .toast.delete {
     background-image: linear-gradient(to right, #fc837a ,#e73f33);
